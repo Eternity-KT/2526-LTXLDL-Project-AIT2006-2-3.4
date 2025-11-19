@@ -1,0 +1,2 @@
+Rule,Issues_Found,Total_Records,Percentage,Description,Action_Taken
+Missing_co2_ppm,299,366,81.69%,Giá trị thiếu trong cột co2_ppm,"Gắn cờ 'is_missing', giữ nguyên giá trị NaN để phân tích sau"

@@ -1,0 +1,17 @@
+Metric,Value
+Weather records (input),366
+Air Quality records (input),366
+Merged records (output),366
+Records lost in merge,0
+Merge success rate,100.00%
+Time range start,2024-01-01 00:00:00
+Time range end,2024-12-31 00:00:00
+Total days,366
+Weather variables,5
+Air Quality variables,6
+Total data variables,11
+Total columns (with flags),38
+Records with quality issues,366
+Records without issues,0
+Overall data completeness,83.18%
+Merge method,INNER JOIN (only common dates)

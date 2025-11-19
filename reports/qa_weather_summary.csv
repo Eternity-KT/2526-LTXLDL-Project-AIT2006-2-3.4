@@ -1,0 +1,3 @@
+Rule,Issues_Found,Total_Records,Percentage,Description,Action_Taken
+Missing_precipitation_mm,12,366,3.28%,Giá trị thiếu trong cột precipitation_mm,"Gắn cờ 'is_missing', giữ nguyên giá trị NaN để phân tích sau"
+Missing_wind_direction_deg,366,366,100.00%,Giá trị thiếu trong cột wind_direction_deg,"Gắn cờ 'is_missing', giữ nguyên giá trị NaN để phân tích sau"

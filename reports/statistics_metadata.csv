@@ -1,0 +1,17 @@
+indicator,name,objective,formula,unit
+temp_mean,Nhiệt độ trung bình,Đo xu hướng nhiệt độ trung tâm trong khoảng thời gian,mean(temperature_avg_C),°C
+temp_p50,Nhiệt độ trung vị (P50),"Giá trị nhiệt độ ở vị trí giữa, ít bị ảnh hưởng bởi outlier","quantile(temperature_avg_C, 0.50)",°C
+temp_p95,Nhiệt độ phân vị 95 (P95),Phát hiện các ngày nóng cực đoan (5% ngày nóng nhất),"quantile(temperature_avg_C, 0.95)",°C
+precip_total,Tổng lượng mưa,Đo tổng lượng mưa tích lũy trong khoảng thời gian,sum(precipitation_mm),mm
+rainy_days,Số ngày mưa,Đếm số ngày có lượng mưa ≥ 1mm,count(precipitation_mm >= 1),ngày
+wind_speed_mean,Tốc độ gió trung bình,Đo tốc độ gió điển hình trong khoảng thời gian,mean(wind_speed_kmh),km/h
+pressure_mean,Áp suất trung bình,Đo áp suất khí quyển trung bình,mean(pressure_hPa),hPa
+pressure_std,Độ lệch chuẩn áp suất,Đo biến động áp suất (độ không ổn định thời tiết),std(pressure_hPa),hPa
+pm2_5_mean,PM2.5 trung bình,Đo nồng độ bụi mịn PM2.5 trung bình,mean(pm2_5_ugm3),μg/m³
+pm2_5_p95,PM2.5 phân vị 95,Phát hiện các ngày ô nhiễm cao (5% ngày ô nhiễm nhất),"quantile(pm2_5_ugm3, 0.95)",μg/m³
+pm2_5_exceed_days,Số ngày PM2.5 vượt ngưỡng,Đếm số ngày PM2.5 vượt 25 μg/m³ (WHO guideline),count(pm2_5_ugm3 > 25),ngày
+pm10_mean,PM10 trung bình,Đo nồng độ bụi thô PM10 trung bình,mean(pm10_ugm3),μg/m³
+pm10_p95,PM10 phân vị 95,Phát hiện các ngày ô nhiễm PM10 cao,"quantile(pm10_ugm3, 0.95)",μg/m³
+pm10_exceed_days,Số ngày PM10 vượt ngưỡng,Đếm số ngày PM10 vượt 45 μg/m³ (WHO guideline),count(pm10_ugm3 > 45),ngày
+uv_max_mean,UV Index trung bình tối đa,Đo mức độ bức xạ UV trung bình trong ngày (đã là daily max),mean(uv_index),index
+ozone_mean,Ozone trung bình,Đo nồng độ ozone trung bình,mean(ozone_ugm3),μg/m³
