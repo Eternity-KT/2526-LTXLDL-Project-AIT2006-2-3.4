@@ -1,0 +1,5 @@
+Cluster_Name,Số ngày,Tỷ trọng (%),temp_mean,precip_total,wind_speed_mean,uv_max,pm2_5_mean,ozone_mean
+Mưa,59,16.7,28.06,16.63,13.84,7.59,20.62,41.03
+Mưa - Bụi cao,94,26.6,28.17,5.98,8.19,7.31,30.47,45.46
+Nóng - Sạch,119,33.6,30.69,1.38,13.09,10.78,15.99,56.71
+Trung tính/Giao mùa,82,23.2,28.86,1.17,8.97,8.79,25.54,72.03
