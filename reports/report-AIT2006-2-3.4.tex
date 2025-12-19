@@ -24,8 +24,6 @@
 \newcommand{\degreec}{$^\circ$C}
 \newcommand{\ozone}{O$_3$}
 \newcommand{\cotwo}{CO$_2$}
-\newcommand{\notwo}{NO$_2$}
-\newcommand{\sotwo}{SO$_2$}
 \newcommand{\pmtwofive}{PM$_{2.5}$}
 \newcommand{\pmten}{PM$_{10}$}
 
@@ -69,7 +67,7 @@
     Năm dữ liệu: 2024\\
     Ngày nộp: 19/12/2025\\
     \vspace{0.3cm}
-    \small Commit Hash: \texttt{077aa6e244f28f0799fe44e271ba16c4bf332e91}
+    \small Commit Hash: \texttt{299a2da}
 }
 
 \begin{document}
@@ -112,7 +110,7 @@ Dự án này nhằm xử lý, phân tích và dự báo dữ liệu thời ti�
     \item \textbf{File đã xử lý:} \texttt{open-meteo-daily-AQ.csv} (tổng hợp theo ngày)
     \item \textbf{Phạm vi:} 1/1/2024 - 31/12/2024 (366 ngày)
     \item \textbf{Vị trí:} Cùng tọa độ với dữ liệu thời tiết
-    \item \textbf{Biến số:} \pmtwofive{}, \pmten{}, CO, \notwo{}, \sotwo{}, \ozone{}, UV Index, Bụi Alder/Birch
+    \item \textbf{Biến số:} \pmtwofive{}, \pmten{}, CO, \ozone{}, \cotwo{}, UV Index
 \end{itemize}
 
 \subsection{Đặc điểm chính của dữ liệu}
@@ -649,13 +647,13 @@ Trung tính & 82 & 23.2 & 28.86 & 1.17 & 8.97 & 8.79 & 25.54 & 72.03 \\
 
 \textbf{Đặc điểm từng cụm:}
 \begin{enumerate}
-    \item \textbf{Cụm "Mưa" (59 ngày, 16.7\%):} Lượng mưa cao nhất (16.63 mm/ngày), \pmtwofive{} trung bình (20.62 \ugm{}), UV thấp do mây che
+    \item \textbf{Cụm "Mưa" (59 ngày, 16.7\%) - Màu vàng:} Lượng mưa cao nhất (16.63 mm/ngày), \pmtwofive{} trung bình (20.62 \ugm{}), UV thấp do mây che
     
-    \item \textbf{Cụm "Mưa - Bụi cao" (94 ngày, 26.6\%):} \pmtwofive{} cao nhất (30.47 \ugm{}), mưa vừa phải nhưng không đủ để giảm bụi, tốc độ gió thấp (8.19 km/h)
+    \item \textbf{Cụm "Mưa - Bụi cao" (94 ngày, 26.6\%) - Màu tím:} \pmtwofive{} cao nhất (30.47 \ugm{}), mưa vừa phải nhưng không đủ để giảm bụi, tốc độ gió thấp (8.19 km/h)
     
-    \item \textbf{Cụm "Nóng - Sạch" (119 ngày, 33.6\%):} Nhiệt độ cao nhất (30.69 \degreec{}), \pmtwofive{} thấp nhất (15.99 \ugm{}), UV cao, gió mạnh
+    \item \textbf{Cụm "Nóng - Sạch" (119 ngày, 33.6\%) - Màu đỏ:} Nhiệt độ cao nhất (30.69 \degreec{}), \pmtwofive{} thấp nhất (15.99 \ugm{}), UV cao, gió mạnh
     
-    \item \textbf{Cụm "Trung tính/Giao mùa" (82 ngày, 23.2\%):} Các chỉ số ở mức trung bình, \ozone{} cao nhất (72.03 \ugm{})
+    \item \textbf{Cụm "Trung tính/Giao mùa" (82 ngày, 23.2\%) - Màu xanh xám:} Các chỉ số ở mức trung bình, \ozone{} cao nhất (72.03 \ugm{})
 \end{enumerate}
 
 \subsubsection{Trực quan hóa phân cụm}
@@ -676,9 +674,10 @@ Trung tính & 82 & 23.2 & 28.86 & 1.17 & 8.97 & 8.79 & 25.54 & 72.03 \\
 
 \textbf{Nhận xét từ calendar heatmap:}
 \begin{itemize}
-    \item Cụm "Nóng - Sạch" (xanh lá) phổ biến nhất, xuất hiện nhiều vào mùa hè
-    \item Cụm "Mưa - Bụi cao" (vàng) tập trung vào đầu và cuối năm
-    \item Cụm "Mưa" (xanh dương) xuất hiện chủ yếu trong mùa mưa (tháng 5-10)
+    \item Cụm "Nóng - Sạch" (đỏ) phổ biến nhất, xuất hiện nhiều vào mùa hè
+    \item Cụm "Mưa - Bụi cao" (tím) tập trung vào đầu và cuối năm
+    \item Cụm "Mưa" (vàng) xuất hiện chủ yếu trong mùa mưa (tháng 5-10)
+    \item Cụm "Trung tính" (xanh xám) phân bố đều trong năm
     \item Phân bố cụm có tính thời vụ rõ rệt
 \end{itemize}
 
@@ -689,17 +688,18 @@ Trung tính & 82 & 23.2 & 28.86 & 1.17 & 8.97 & 8.79 & 25.54 & 72.03 \\
 Sử dụng \textbf{Isolation Forest} để phát hiện các ngày có chất lượng không khí bất thường:
 \begin{itemize}
     \item \textbf{Algorithm:} Isolation Forest
-    \item \textbf{Contamination:} 10\% (giả định 10\% ngày là anomalies)
-    \item \textbf{Features:} \pmtwofive{}, \pmten{}, lượng mưa, tốc độ gió, nhiệt độ
+    \item \textbf{Contamination:} 5\% (giả định 5\% ngày là anomalies)
+    \item \textbf{Features:} \pmtwofive{}, lượng mưa, tốc độ gió, nhiệt độ
+    \item \textbf{Kết quả:} Phát hiện được các ngày có ô nhiễm bất thường cao
 \end{itemize}
 
-\subsubsection{Các ngày Case Study}
+\subsubsection{Case Study}
 
-Hai ngày được chọn để phân tích chi tiết:
+Phân tích chi tiết ngày có ô nhiễm cao:
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.95\textwidth]{../figures/case_study_rank2_2024-11-23.pdf}
+\includegraphics[width=0.95\textwidth]{../figures/15_case_study_rank2_2024-11-23.pdf}
 \caption{Case Study Top 2: Diễn biến ô nhiễm ngày 23/11/2024 - một trong những ngày có PM2.5 cao nhất.}
 \label{fig:case-study-rank2}
 \end{figure}
@@ -710,21 +710,6 @@ Hai ngày được chọn để phân tích chi tiết:
     \item Tốc độ gió yếu: 7.2 km/h
     \item Lượng mưa: 0 mm (thời tiết khô hanh)
     \item Xu hướng: Tăng dần từ ngày 20/11, đỉnh điểm 23/11, sau đó giảm
-\end{itemize}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.95\textwidth]{../figures/case_study_zoom_2024-12-30.pdf}
-\caption{Case Study ngày tệ nhất: Phân tích chi tiết sự kiện ô nhiễm nặng ngày 30/12/2024.}
-\label{fig:case-study-worst}
-\end{figure}
-
-\textbf{Ngày 30/12/2024 - Ngày ô nhiễm tệ nhất:}
-\begin{itemize}
-    \item \pmtwofive{}: 56.9 \ugm{} (cao nhất cả năm)
-    \item AQI Category: Unhealthy for Sensitive Groups
-    \item Điều kiện thời tiết: Không mưa, gió yếu, nhiệt độ cao
-    \item Xu hướng: Tích tụ dần trong nhiều ngày liên tiếp
 \end{itemize}
 
 \textbf{Nhận xét chung về các ngày bất thường:}
@@ -900,16 +885,15 @@ Phân cụm K-Means đã giúp nhận diện 4 loại điều kiện môi trư�
 |   |-- 04_monthly_boxplot.pdf
 |   |-- 05_correlation_matrix.pdf
 |   |-- 06_wind_pm25_scatter.pdf
-|   |-- 07_temp_ozone_scatter.pdf
-|   |-- 08_pm25_vs_pm10_timeseries.pdf
+|   |-- 7_temp_ozone_scatter.pdf
+|   |-- 8_pm25_vs_pm10_timeseries.pdf
 |   |-- 09_aqi_category_stacked_bar.pdf
-|   |-- 10_kmeans_pca_scatter.pdf
-|   |-- 11_kmeans_calendar_heatmap.pdf
+|   |-- 10_kmeans_pca_scatter_yellow_rain.pdf
+|   |-- 11_kmeans_calendar_heatmap_yellow.pdf
 |   |-- 12_feature_importance.pdf
 |   |-- 13_pm25_predictions.pdf
 |   |-- 14_timeseries_pm25.pdf
-|   |-- 15_case_study_rank2.pdf
-|   +-- 16_case_study_zoom.pdf
+|   +-- 15_case_study_rank2_2024-11-23.pdf
 |
 +-- src/                          # Ma nguon
     |-- 01_weather_data_cleaning.ipynb
@@ -926,7 +910,7 @@ Phân cụm K-Means đã giúp nhận diện 4 loại điều kiện môi trư�
 
 \begin{table}[H]
 \centering
-\caption{Danh sách 16 figures được sử dụng trong báo cáo}
+\caption{Danh sách 15 figures được sử dụng trong báo cáo}
 \begin{tabular}{clp{8cm}}
 \toprule
 \textbf{STT} & \textbf{Tên file} & \textbf{Mô tả} \\
@@ -937,16 +921,15 @@ Phân cụm K-Means đã giúp nhận diện 4 loại điều kiện môi trư�
 4 & 04\_monthly\_boxplot.pdf & Boxplot theo tháng \\
 5 & 05\_correlation\_matrix.pdf & Ma trận tương quan \\
 6 & 06\_wind\_pm25\_scatter.pdf & Scatter gió vs PM2.5 \\
-7 & 07\_temp\_ozone\_scatter.pdf & Scatter nhiệt độ vs O3 \\
-8 & 08\_pm25\_vs\_pm10\_timeseries.pdf & So sánh PM2.5 và PM10 \\
+7 & 7\_temp\_ozone\_scatter.pdf & Scatter nhiệt độ vs O3 \\
+8 & 8\_pm25\_vs\_pm10\_timeseries.pdf & So sánh PM2.5 và PM10 \\
 9 & 09\_aqi\_category\_stacked\_bar.pdf & Phân loại AQI \\
-10 & 10\_kmeans\_pca\_scatter.pdf & PCA scatter clustering \\
-11 & 11\_kmeans\_calendar\_heatmap.pdf & Calendar heatmap \\
+10 & 10\_kmeans\_pca\_scatter\_yellow\_rain.pdf & PCA scatter clustering \\
+11 & 11\_kmeans\_calendar\_heatmap\_yellow.pdf & Calendar heatmap \\
 12 & 12\_feature\_importance.pdf & Feature importance \\
 13 & 13\_pm25\_predictions.pdf & Kết quả dự báo \\
 14 & 14\_timeseries\_pm25.pdf & Time series PM2.5 \\
-15 & 15\_case\_study\_rank2.pdf & Case study rank 2 \\
-16 & 16\_case\_study\_zoom.pdf & Case study ngày tệ nhất \\
+15 & 15\_case\_study\_rank2\_2024-11-23.pdf & Case study Top 2 \\
 \bottomrule
 \end{tabular}
 \end{table}
