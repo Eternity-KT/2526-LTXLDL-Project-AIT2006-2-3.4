@@ -1,0 +1,18 @@
+# Exclude final report files
+reports/report-AIT2006-2-3.4-final.tex
+reports/report-AIT2006-2-3.4-final.pdf
+
+# LaTeX temporary files
+*.aux
+*.log
+*.out
+*.toc
+
+# Python cache
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# System files
+.DS_Store
+Thumbs.db
